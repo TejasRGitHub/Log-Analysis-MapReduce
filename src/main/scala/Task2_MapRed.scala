@@ -52,7 +52,7 @@ object Task2_MapRed {
         case Some(_) =>
           // Get the batch number / grp number
           val grpNum = CommonFunctions.getTimeSlot(tokens, intervalLength)
-          if tokens(2).equalsIgnoreCase("ERROR") then
+          if tokens(2).equalsIgnoreCase(config.getString("HW1_Mapred.logType")) then
             word.set(grpNum.toString + "," + tokens(2))
             output.collect(word, one)
         case None =>
@@ -84,8 +84,10 @@ object Task2_MapRed {
     val conf = new JobConf(this.getClass)
     conf.set("mapred.textoutputformat.separator", ",")
     conf.setJobName("HW1_MAPRED_TASK_1-A")
-    conf.set("mapreduce.job.maps", config.getString("HW1_Mapred.numOfMappers"))
-    conf.set("mapreduce.job.reduces", config.getString("HW1_Mapred.numOfReducers"))
+    if config.getString("HW1_Mapred.setMappers").toInt == 1 then
+      conf.set("mapreduce.job.maps", config.getString("HW1_Mapred.numOfMappers"))
+    if config.getString("HW1_Mapred.setReducers").toInt == 1 then
+      conf.set("mapreduce.job.reduces", config.getString("HW1_Mapred.numOfReducers"))
     conf.setOutputKeyClass(classOf[IntWritable])
     conf.setOutputValueClass(classOf[Text])
     conf.setMapperClass(classOf[Map])

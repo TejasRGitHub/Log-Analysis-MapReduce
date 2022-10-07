@@ -69,8 +69,10 @@ object Task1_MapRed {
     conf.set("mapreduce.output.textoutputformat.separator", ",")
     conf.setJobName("HW1_MAPRED_TASK_1")
     //conf.set("fs.defaultFS", "file:///")
-    conf.set("mapreduce.job.maps", config.getString("HW1_Mapred.numOfMappers"))
-    conf.set("mapreduce.job.reduces", config.getString("HW1_Mapred.numOfReducers"))
+    if config.getString("HW1_Mapred.setMappers").toInt == 1 then
+      conf.set("mapreduce.job.maps", config.getString("HW1_Mapred.numOfMappers"))
+    if config.getString("HW1_Mapred.setReducers").toInt == 1 then
+      conf.set("mapreduce.job.reduces", config.getString("HW1_Mapred.numOfReducers"))
     conf.setOutputKeyClass(classOf[Text])
     conf.setOutputValueClass(classOf[IntWritable])
     conf.setMapperClass(classOf[Map])

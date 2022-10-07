@@ -33,11 +33,13 @@ For Running Task 3:
 For Running Task 4:
 `yarn jar <file path to the jar file>/HW1_MapRed-assembly-0.1.0-SNAPSHOT.jar org.CS441HW1.runMapReduce4 /user/<user name>/input /user/<user name>/output`
 
+
+Note - The timeinterval, pattern to match the log message, and other configs are set in application.conf. In order to change these please open the project in IntelliJ editor and edit them in the application.conf and create a fat Jar by issuing `sbt assembly` from the terminal.
+
 ## Running on AWS EMR 
 
 Once you have generated the jar file, login into the AWS Account and create an S3 bucket and put your jar and input logs files there
-
-
+****** ADD this section *******
 
 ## Input / Log files used for this project
 

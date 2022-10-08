@@ -9,13 +9,26 @@ used as input. Thus, each log line is and independent input and that is used a i
 
 Reducer works by taking the output from the mapper (about the key value pairs) and processes and combines the results from mappers and produces the final results
 
+#### Youtube Video - https://www.youtube.com/watch?v=x-pt8sSvxjE
+
 ## Instructions on Setting up Project
 
 1. Please clone / pull the repository from https://github.com/Tejas-UIC/CS441_HW1_MapReduce.git
 2. Once the repository is cloned, open the project in IntelliJ (This code was built and tested on IntelliJ IDEA 2022.2.1)
 3. If sbt is installed on the system, type on terminal in this order `sbt clean`, `sbt compile`, `sbt assembly` OR if you have sbt and scala plugins installed on IntelliJ then type `clean`, `compile`, `assembly`.
 4. `sbt assembly` will compile and create a fat jar inside the `target\scala-x.x.x` (where x.x.x is the scala version)
-5. Then use this Jar to run Mapreduce jobs on Hadoop or AWS EMR. Please refer to below sections for running the jar
+5. Then use this Jar to run Mapreduce jobs on Hadoop or AWS EMR. Please refer to below sections for running the jar.
+
+To run using sbt run , please type `sbt run <logFile path> <output file path>`. Then the terminal will prompt to run select map reduce tasks. Below table summarizes this mapping.
+Also note that if you are running task 2, then add intermediate output path (refer to hadoop commands for the same)
+
+| Package.Main method name | Task  |
+|--------------------------|-------|
+| org.CS441HW1.runMapReduce | task1 |
+| org.CS441HW1.runMapReduce2 | task2 |
+| org.CS441HW1.runMapReduce3 | task3 |
+| org.CS441HW1.runMapReduce4 | task4 |
+
 
 ## Running MapReduce Tasks (On Hadoop)
 
@@ -45,7 +58,12 @@ Note - The timeinterval, pattern to match the log message, and other configs are
 ## Running on AWS EMR 
 
 Once you have generated the jar file, login into the AWS Account and create an S3 bucket and put your jar and input logs files there
-****** ADD this section *******
+Then goto AWS EMR section and create an EMR Cluster with default setting. Please select Hadoop ^=3.2.1 version (or ^=emr-6.8.0).
+Create a step and provide it path to the jar file (which you kept in S3 bucket). Then provide the following arguments depending on the task
+
+e.g. for task1, use these argument , org.CS441HW1.runMapReduce s3://hw1-441-logfiles/ s3://hw1-441-outputs/task1
+
+Please check the [youtube](https://www.youtube.com/watch?v=x-pt8sSvxjE) video for more details
 
 ## Input / Log files used for this project
 

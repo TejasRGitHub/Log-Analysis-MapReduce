@@ -1,7 +1,13 @@
-# Tejas Dhananjay Rajopadhye ( UIN - )
+# Tejas Dhananjay Rajopadhye ( UIN - 675873639)
 
 ## CS441_HW1_MapReduce
 CS 441 HW1 using Hadoop's Map Reduce to process logs files 
+
+Apache Hadoop MapReduce is a framework which can be used to process data in distributed style. MapReduce uses a mapper functions which 
+creates key value pairs and each independent data item. For example, in this project log files ( having specified log format ) are
+used as input. Thus, each log line is and independent input and that is used a input to the mapper function. 
+
+Reducer works by taking the output from the mapper (about the key value pairs) and processes and combines the results from mappers and produces the final results
 
 ## Instructions on Setting up Project
 
@@ -49,6 +55,18 @@ Each log file generates 1 mapper task inside a job.
 
 Note - If the number of mappers and reducers is given then those many mappers and reducers are used for each task
 For testing, the number of mappers is not set but the number of reducer is set to 1.
+
+## Configuration Settings 
+
+| Configs       | Value of Config                                       |
+|---------------|-------------------------------------------|
+| timeInterval  | 5 seconds                                             |
+| setMappers    | 0 (Number of mapper not set while configuring job)    |
+| setReducers   | 1 (Number of reducer will be set while configuring job) |
+| numOfReducers | 1                                                     |
+| logType       | ERROR                                                 |
+
+Note - These configuration are mentioned in application.conf (/src/main/resources/). If you want to modify them, change it in application.conf and compile and create the fat jar again with `assembly` command in IntelliJ OR `sbt assembly` command 
 
 ## Project Deliverables 
 

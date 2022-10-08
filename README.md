@@ -9,7 +9,7 @@ used as input. Thus, each log line is and independent input and that is used a i
 
 Reducer works by taking the output from the mapper (about the key value pairs) and processes and combines the results from mappers and produces the final results
 
-#### Youtube Video - https://www.youtube.com/watch?v=x-pt8sSvxjE
+#### Youtube Video - https://www.youtube.com/watch?v=WJr5sC70LCs
 
 ## Instructions on Setting up Project
 

@@ -64,6 +64,8 @@ object Task3_MapRed {
     conf.setInputFormat(classOf[TextInputFormat])
     FileInputFormat.setInputPaths(conf, new Path(inputPath))
     FileOutputFormat.setOutputPath(conf, new Path(outputPath))
-    JobClient.runJob(conf)
+    val jobRet: RunningJob = JobClient.runJob(conf)
+    if jobRet.isComplete then
+      logger.info("Completed the Job Successfully")
 }
 

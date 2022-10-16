@@ -75,7 +75,9 @@ object Task2_MapRed {
       output.collect(new IntWritable(tokens(0).toInt),new Text(tokens(1) + "," + tokens(2)) )
 
   // Comparator to sort the output generated from the second mapper (MAP2) in descending order
-  class DecreasingComparator extends IntWritable.Comparator {
+  class DescendingOrderComparator extends IntWritable.Comparator {
+
+      // Overridden Function to create descending order for values . Using older APIs which has the below compare function // reference : IntWritable.Comparator Function
       override def compare(b1: Array[Byte], s1: Int, l1: Int, b2: Array[Byte], s2: Int, l2: Int): Int = -super.compare(b1, s1, l1, b2, s2, l2)
   }
 
@@ -103,15 +105,17 @@ object Task2_MapRed {
       val conf2 = new JobConf(this.getClass)
       conf2.set("mapred.textoutputformat.separator", ",")
       conf2.setJobName("HW1_MAPRED_TASK_1-B")
-      conf2.set("mapreduce.job.maps", config.getString("HW1_Mapred.numOfMappers"))
-      conf2.set("mapreduce.job.reduces", config.getString("HW1_Mapred.numOfReducers"))
+      if config.getString("HW1_Mapred.setMappers").toInt == 1 then
+        conf2.set("mapreduce.job.maps", config.getString("HW1_Mapred.numOfMappers"))
+      if config.getString("HW1_Mapred.setReducers").toInt == 1 then
+        conf2.set("mapreduce.job.reduces", config.getString("HW1_Mapred.numOfReducers"))
       conf2.setOutputKeyClass(classOf[IntWritable])
       conf2.setOutputValueClass(classOf[Text])
       conf2.setMapperClass(classOf[Map2])
       conf2.setMapOutputKeyClass(classOf[IntWritable])
       conf2.setMapOutputValueClass(classOf[Text])
       conf2.setInputFormat(classOf[TextInputFormat])
-      conf2.setOutputKeyComparatorClass(classOf[DecreasingComparator])
+      conf2.setOutputKeyComparatorClass(classOf[DescendingOrderComparator])
       FileInputFormat.setInputPaths(conf2, new Path(outputPath))
       FileOutputFormat.setOutputPath(conf2, new Path(outputPath2))
       JobClient.runJob(conf2)

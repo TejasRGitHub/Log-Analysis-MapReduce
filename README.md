@@ -63,7 +63,7 @@ Create a step and provide it path to the jar file (which you kept in S3 bucket).
 
 e.g. for task1, use these argument , org.CS441HW1.runMapReduce s3://hw1-441-logfiles/ s3://hw1-441-outputs/task1
 
-Please check the [youtube](https://www.youtube.com/watch?v=x-pt8sSvxjE) video for more details
+Please check the [youtube](https://www.youtube.com/watch?v=WJr5sC70LCs) video for more details
 
 ## Input / Log files used for this project
 
@@ -73,6 +73,8 @@ Each log file generates 1 mapper task inside a job.
 
 Note - If the number of mappers and reducers is given then those many mappers and reducers are used for each task
 For testing, the number of mappers is not set but the number of reducer is set to 1.
+
+All the map reduce functions assume that the logger format in the log files follow logback.xml pattern inside the `./src/resouces/logback.xml` file
 
 ## Configuration Settings 
 
@@ -118,7 +120,7 @@ The mapper creates a intermediate output in which the value from the reducer bec
 For e.g. key=22:45:18.000,ERROR & value=[3] from the reducer stage 
 Output from Mapper 2 is key=[3] value=22:45:18.000,ERROR
 
-This is made so that the `DecreasingComparator` can be used to sort the keys in decreasing order 
+This is made so that the `DescendingOrderComparator` can be used to sort the keys in Descending order 
 
 #### Task 3 -
 
@@ -128,6 +130,9 @@ The mapper does the same work as that of task 1 except the key only contains the
 e.g. - key={ERROR, INFO, DEBUG, etc} value=[1]
 
 The reducer aggregates the values for each key and the produces the output and writes it to the output path
+
+e.g. - 
+key = INFO value = 34
 
 #### Task 4 - 
 
